@@ -9,7 +9,7 @@
 <body>
 <nav class="nav">
   <a class="nav-link active" aria-current="page" href="{% url 'blog:index' %}">Главная</a>
-  <a class="nav-link" href="#">Посты</a>
+  <a class="nav-link" href="{% url 'blog:add_post' %}">Новый пост</a>
   <a class="nav-link" href="{% url 'blog:about' %}">О сайте</a>
 </nav>
 {% block content %}
