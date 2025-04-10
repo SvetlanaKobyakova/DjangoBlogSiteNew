@@ -1,10 +1,11 @@
 {% extends 'blog/base.html' %}
-
+{% load static %}
 {% block content %}
-<h1>Главная страница</h1>
+<img src="{% static 'img/2.jpg' %}" width="200px" height="auto"
+
 
 {% for post in posts %}
-    <h3><b>{{ post.author }}</b></h3>
+    <p><h3><b>{{ post.author }}</b></h3></p>
     <h4><a href="{% url 'blog:read_post' pk=post.pk %}">{{ post.title }}</a></h4>
     <p>{{ post.text }}</p>
     <p><i>{{ post.created_at }}</i></p>

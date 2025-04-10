@@ -9,6 +9,7 @@ class Post(models.Model):
     text = models.TextField(verbose_name='Текст поста')
     created_at = models.DateTimeField(default=timezone.now, verbose_name='Дата создания', editable=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
+    image = models.ImageField(upload_to='posts/', null=True, verbose_name='Изображение')
 
     class Meta:
         verbose_name = 'Пост'
