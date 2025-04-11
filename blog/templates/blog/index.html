@@ -2,13 +2,29 @@
 {% load static %}
 {% block content %}
 <img src="{% static 'img/2.jpg' %}" width="200px" height="auto"
-
-
-{% for post in posts %}
-    <p><h3><b>{{ post.author }}</b></h3></p>
-    <h4><a href="{% url 'blog:read_post' pk=post.pk %}">{{ post.title }}</a></h4>
-    <p>{{ post.text }}</p>
-    <p><i>{{ post.created_at }}</i></p>
-{% endfor %}
-
+<div class="post-list">
+    {% for post in posts %}
+        <div class="post-item">
+            <div class="post-image">
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" width="200px" height="auto">
+                {% else %}
+                    <img src="{% static 'img/no_image.png' %}" width="200px" height="auto">
+                {% endif %}
+            </div>
+            <div class="post-author">
+                {{ post.author }}
+            </div>
+            <div class="post-title">
+                <a href="{% url 'blog:read_post' pk=post.pk %}">{{ post.title }}</a>
+            </div>
+            <div class="post-text">
+                {{ post.text }}
+            </div>
+            <div class="post-created">
+                {{ post.created_at }}
+            </div>
+        </div>
+    {% endfor %}
+</div>
 {% endblock content %}
