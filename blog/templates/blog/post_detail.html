@@ -3,18 +3,19 @@
 
 {% block content %}
 
-<h3>Информация о посте № {{ post.pk }}</h3>
-<hr>
-<b>{{ post.author }}</b>
-<h4>{{ post.title }}</h4>
-
 {% if post.image %}
     <p><img src="{{ post.image.url }}" width="200px" height="auto"></p>
 {% else %}
     <p><img src="{% static 'img/no_image.png' %}" width="200px" height="auto"></p>
 {% endif %}
 
+<h3>Информация о посте № {{ post.pk }}</h3>
+<hr>
+<b>{{ post.author }}</b>
+<h4><a>{{ post.title }}</a></h4>
+
 <p>{{ post.text }}</p>
 <p><i>{{ post.created_at }}</i></p>
 
+<a href="{% url 'blog:update_post' pk=post.pk %}">Изменить пост</a>
 {% endblock content %}
