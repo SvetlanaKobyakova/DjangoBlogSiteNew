@@ -13,9 +13,20 @@
 <hr>
 <b>{{ post.author }}</b>
 <h4><a>{{ post.title }}</a></h4>
-
 <p>{{ post.text }}</p>
 <p><i>{{ post.created_at }}</i></p>
 
-<a href="{% url 'blog:update_post' pk=post.pk %}">Изменить пост</a>
+<div class="btn-actions">
+    <div class="btn-edit-post">
+        <a href="{% url 'blog:update_post' pk=post.id %}">
+            <button type="button">Редактировать</button>
+        </a>
+    </div>
+    <div class="btn-del-post">
+        <a href="{% url 'blog:delete_post' pk=post.id %}">
+            <button type="button">Удалить</button>
+        </a>
+    </div>
+</div>
+
 {% endblock content %}

@@ -54,3 +54,12 @@ def update_post(request, pk):
             "image": post.image,
         })
         return render(request, template_name="blog/post_edit.html", context={"form": post_form})
+
+
+def delete_post(request, pk):
+    post = Post.objects.get(pk=pk)
+    context = {"post": post}
+    if request.method == "POST":
+        post.delete()
+        return redirect('blog:index')
+    return render(request, template_name='blog/post_delete.html', context=context)
