@@ -33,9 +33,9 @@ def add_post(request):
             return index(request)
 
 
-def read_post(request, pk):
+def read_post(request, slug):
     # post = Post.objects.get(pk=pk)
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(Post, slug=slug)
     context = {'title': "Информация о посте", 'post': post}
     return render(request, template_name='blog/post_detail.html', context=context)
 
