@@ -52,7 +52,7 @@ def update_post(request, pk):
             post.author = post_form.cleaned_data['author']
             post.image = post_form.cleaned_data['image']
             post.save()
-            return redirect("blog:read_post", pk=post.id)
+            return redirect("blog:update_post", pk=post.id)
     else:
         post_form = PostForm(initial={
             "title": post.title,
