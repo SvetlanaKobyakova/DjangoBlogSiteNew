@@ -26,6 +26,13 @@ class RegistrationForm(UserCreationForm):
 
 
 class NewRegistrationForm(forms.ModelForm):
+    username = forms.CharField(label='Логин',
+                               error_messages={
+                                   'required': 'Пожалуйста, введите логин'
+                               })
+    first_name = forms.CharField(label='Имя')
+    last_name = forms.CharField(label='Фамилия')
+    email = forms.EmailField(label='Эл.почта')
     password = forms.CharField(label='Пароль',
                                 widget=forms.PasswordInput)
     password2 = forms.CharField(label='Подтвердите пароль',

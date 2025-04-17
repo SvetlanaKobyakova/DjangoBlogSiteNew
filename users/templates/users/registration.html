@@ -5,6 +5,11 @@
 <form method="post">
     {% csrf_token %}
     {{ register_form }}
+    {% if register_form.username.errors %}
+        {% for error in register_form.username.errors %}
+            <b>{{ error }}</b>
+        {% endfor %}
+    {% endif %}
     <button type="submit">Зарегистрироваться</button>
 </form>
 
