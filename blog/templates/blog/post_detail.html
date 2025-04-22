@@ -16,17 +16,19 @@
 <p>{{ post.text }}</p>
 <p><i>{{ post.created_at }}</i></p>
 
-<div class="btn-actions">
-    <div class="btn-edit-post">
-        <a href="{% url 'blog:update_post' pk=post.id %}">
-            <button type="button">Редактировать</button>
-        </a>
+{% if  user == post.author %}
+    <div class="btn-actions">
+        <div class="btn-edit-post">
+            <a href="{% url 'blog:update_post' pk=post.id %}">
+                <button type="button">Редактировать</button>
+            </a>
+        </div>
+        <div class="btn-del-post">
+            <a href="{% url 'blog:delete_post' pk=post.id %}">
+                <button type="button">Удалить</button>
+            </a>
+        </div>
     </div>
-    <div class="btn-del-post">
-        <a href="{% url 'blog:delete_post' pk=post.id %}">
-            <button type="button">Удалить</button>
-        </a>
-    </div>
-</div>
+{% endif %}
 
 {% endblock content %}

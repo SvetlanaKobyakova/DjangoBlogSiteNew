@@ -3,7 +3,7 @@
 {% block content %}
 <img src="{% static 'img/2.jpg' %}" width="200px" height="auto">
 <div class="post-list">
-    {% for post in posts %}
+    {% for post in page_obj %}
         <div class="post-item">
             <div class="post-image">
                 {% if post.image %}
@@ -27,4 +27,21 @@
         </div>
     {% endfor %}
 </div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo;Первая</a>
+            <a href="{{page_obj.previous_page_number}}">Предыдущая</a>
+        {% endif %}
+        <span class="current">
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+        </span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Следующая</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Последняя&raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
 {% endblock content %}

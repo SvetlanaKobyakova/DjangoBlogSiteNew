@@ -1,18 +1,32 @@
+from django.contrib.admin.templatetags.admin_list import pagination
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Post
 from .forms import PostForm
+from django.core.paginator import Paginator
 
 
 def index(request):
-    # получение всех постов (select * from blog_post)
-    posts = Post.objects.all()
-    context = {'title': 'Главная страница', 'posts': posts}
+    # получение всех постов, отсортированных по дате публикации (select * from blog_post, order by create_at DESK)
+    posts = Post.objects.all().order_by('-created_at')
+    count_posts = Post.objects.count()
+    # показываем по три поста на странице
+    per_page = 3
+    paginator = Paginator(posts, per_page)
+    # получаем номер страницы из URL
+    page_number = request.GET.get('page')
+    # получаем объекты для текущей страницы
+    page_obj = paginator.get_page(page_number)
+    context = {'title': 'Главная страница',
+               'page_obj': page_obj,
+               'count_posts': count_posts
+               }
     return render(request, template_name='blog/index.html', context=context)
 
 
 def about(request):
-    context = {'title': 'О сайте'}
+    count_posts = Post.objects.count()
+    context = {'title': 'О сайте', 'count_posts': count_posts}
     return render(request, template_name='blog/about.html', context=context)
 
 @login_required
@@ -52,7 +66,7 @@ def update_post(request, pk):
             post.author = post_form.cleaned_data['author']
             post.image = post_form.cleaned_data['image']
             post.save()
-            return redirect("blog:read_post", pk=post.slug)
+            return redirect("blog:read_post", slug=post.slug)
     else:
         post_form = PostForm(initial={
             "title": post.title,
