@@ -20,6 +20,14 @@
     <a class="nav-link" href="{% url 'users:logout' %}">Выйти</a>
   {% endif %}
 </nav>
+
+{% if messages %}
+    {% for message in messages %}
+        <div>{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+
 {% block content %}
 {% endblock content %}
 </body>

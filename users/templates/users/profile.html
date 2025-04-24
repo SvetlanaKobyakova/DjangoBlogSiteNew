@@ -7,6 +7,9 @@
 <div>Фамилия - {{ user.last_name }}</div>
 <div>Эл.почта - {{ user.email }}</div>
 <div>Дата регистрации:{{ user.date_joined }}</div>
+<a href="{% url 'users:change_password' %}">
+    <button type="submit">Сменить пароль</button>
+</a>
 
 
 {% endblock content %}
