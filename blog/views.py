@@ -64,6 +64,7 @@ def update_post(request, pk):
             post.image = post_form.cleaned_data['image']
             post.save()
             return redirect("blog:read_post", slug=post.slug)
+        return None
     else:
         post_form = PostForm(initial={
             "title": post.title,
