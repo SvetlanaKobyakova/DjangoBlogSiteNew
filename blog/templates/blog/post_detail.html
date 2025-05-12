@@ -11,7 +11,15 @@
 
 <h3>Информация о посте № {{ post.pk }}</h3>
 <hr>
-<b>{{ post.author }}</b>
+
+{% if user.is_authenticated %}
+    <a href="{% url 'blog:user_info' user_id=post.author.pk %}">
+        <b>{{ post.author }}</b>
+    </a>
+{% else %}
+    <b>{{ post.author }}</b>
+{% endif %}
+
 <h4><a>{{ post.title }}</a></h4>
 <p>{{ post.text }}</p>
 <p><i>{{ post.created_at }}</i></p>

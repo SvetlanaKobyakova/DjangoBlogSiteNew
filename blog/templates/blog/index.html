@@ -1,6 +1,12 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 {% block content %}
+<div>
+    <form action="" method="get" style="display: flex; justify-content: end; margin-right: 100px;">
+        <input type="search" name="query">
+        <button type="submit">Поиск</button>
+    </form>
+</div>
 <img src="{% static 'img/2.jpg' %}" width="200px" height="auto">
 <div class="post-list">
     {% for post in page_obj %}
@@ -13,7 +19,9 @@
                 {% endif %}
             </div>
             <div class="post-author">
-                {{ post.author }}
+                <a href="{% url 'blog:user_posts' user_id=post.author.pk %}">
+                    {{ post.author }}
+                </a>
             </div>
             <div class="post-title">
                 <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
