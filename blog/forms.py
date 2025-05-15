@@ -30,4 +30,9 @@ class PostForm(forms.ModelForm):
             'image': 'Изображение',
         }
 
-
+class FilterForm(forms.Form):
+    author = forms.ModelChoiceField(queryset=User.objects.all(),
+                                    label='Автор', required=False)
+    created_at = forms.DateField(label='Дата публикации',
+                                 widget=forms.DateInput(attrs={'type': 'date'}),
+                                 input_formats=['%Y-%m-%d'], required=False)
