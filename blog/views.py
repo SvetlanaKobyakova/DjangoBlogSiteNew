@@ -152,4 +152,5 @@ def filter_post(request):
                'count_posts': count_posts,
                'filter_form': filter_form
                }
+
     return render(request, template_name='blog/index.html', context=context)
